@@ -38,16 +38,6 @@
 #include <utils/interactor.h>
 #include <groute/internal/cuda_utils.h>
 
-#ifndef _WIN32
-#define gflags google
-#endif
-
-#ifndef NDEBUG
-#define RUN_ALL true
-#else
-#define RUN_ALL false
-#endif
-
 // App
 DEFINE_bool(interactive, false, "Run an interactive session");
 DEFINE_string(cmdfile, "", "A file with commands to execute");

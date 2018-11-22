@@ -17,7 +17,7 @@ include_directories(${PROJECT_SOURCE_DIR}/deps/cub)
 include_directories(${PROJECT_SOURCE_DIR}/deps/json)
 ############## BUILD ##############
 
-set(EXTRA_LIBS gflags_static pthread ${CUDA_TOOLKIT_TARGET_DIR}/lib64/stubs/libcuda.so ${CUDA_TOOLKIT_TARGET_DIR}/lib64/libnvToolsExt.so)
+set(EXTRA_LIBS gflags pthread ${CUDA_TOOLKIT_TARGET_DIR}/lib64/stubs/libcuda.so ${CUDA_TOOLKIT_TARGET_DIR}/lib64/libnvToolsExt.so)
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     message("Debug mode")
@@ -70,4 +70,4 @@ target_link_libraries(hybrid_bc ${EXTRA_LIBS})
 
 add_executable(gtools src/utils/parser.cpp src/utils/utils.cpp
         samples/tools/gtools.cpp)
-target_link_libraries(gtools gflags_static)
+target_link_libraries(gtools gflags)

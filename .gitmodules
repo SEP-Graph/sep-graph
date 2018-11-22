@@ -1,0 +1,6 @@
+[submodule "deps/cub"]
+	path = deps/cub
+	url = https://github.com/NVlabs/cub.git
+[submodule "deps/gflags"]
+	path = deps/gflags
+	url = https://github.com/gflags/gflags.git

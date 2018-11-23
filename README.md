@@ -10,7 +10,6 @@ PPoPP 2019 paper.
 * CUDA == 9.x
 * GCC == 5.x.0
 * CMake >= 2.8
-* Python == 3.X
 * Linux/Unix
 
 #### 2.2 Hardware Requirements ####

@@ -21,21 +21,15 @@ set(EXTRA_LIBS gflags pthread ${CUDA_TOOLKIT_TARGET_DIR}/lib64/stubs/libcuda.so 
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     message("Debug mode")
-    #set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS};-gencode;arch=compute_35,code=sm_35;-gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_52,code=sm_52;-gencode;arch=compute_52,code=compute_52;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_61,code=sm_61;-gencode;arch=compute_70,code=sm_70;-g;-lineinfo;-Xcompiler;-ggdb;-std=c++11)
     set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS};-gencode;arch=compute_35,code=sm_35;-gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_52,code=sm_52;-gencode;arch=compute_52,code=compute_52;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_61,code=sm_61;-g;-lineinfo;-Xcompiler;-ggdb;-std=c++11)
 else ()
     set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS};-gencode;arch=compute_35,code=sm_35;-gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_52,code=sm_52;-gencode;arch=compute_52,code=compute_52;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_61,code=sm_61;-O3;-DNDEBUG;-Xcompiler;-DNDEBUG;-std=c++11)
-#    set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS};-gencode;arch=compute_35,code=sm_35;-gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_52,code=sm_52;-gencode;arch=compute_52,code=compute_52;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_61,code=sm_61;-gencode;arch=compute_70,code=sm_70;-O3;-DNDEBUG;-Xcompiler;-DNDEBUG;-std=c++11)
 endif ()
 
 set(CUDA_PROPAGATE_HOST_FLAGS OFF)
 
 # Addresses a bug where code is not compiled as C++11 in non-CUDA code and older g++ versions
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -DNDEBUG")
-
-#set(CMAKE_CXX_FLAGS "-Wall -Wextra")
-#set(CMAKE_CXX_FLAGS_DEBUG "-g")
-#set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 message("-- Host Compiler: ${CUDA_HOST_COMPILER}")
 
@@ -62,7 +56,6 @@ cuda_add_executable(hybrid_sssp src/utils/parser.cpp src/utils/utils.cpp src/uti
 target_link_libraries(hybrid_sssp ${EXTRA_LIBS})
 
 cuda_add_executable(hybrid_bc src/utils/parser.cpp src/utils/utils.cpp src/utils/to_json.cpp #src/groute/graphs/csr_graph.cpp
-#        samples/hybrid_bc/hybrid_bc.cu
         samples/hybrid_bc/hybrid_bc.cu
         samples/hybrid_bc/hybrid_bc_host.cpp
         samples/hybrid_bc/main.cpp)

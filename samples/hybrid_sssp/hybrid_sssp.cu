@@ -1,6 +1,9 @@
-//
-// Created by liang on 5/8/18.
-//
+// ----------------------------------------------------------------
+// SEP-Graph: Finding Shortest Execution Paths for Graph Processing under a Hybrid Framework on GPU
+// ----------------------------------------------------------------
+// This source code is distributed under the terms of LICENSE
+// in the root directory of this source distribution.
+// ----------------------------------------------------------------
 #include <functional>
 #include <map>
 #include <framework/framework.cuh>
@@ -208,7 +211,6 @@ bool HybridSSSP()
         printf("Enable priority for scale-free dataset\n");
         engine_opt.SetTwoLevelBasedPriority(FLAGS_prio_delta);
     }
-//    engine_opt.ForceVariant(sepgraph::common::AlgoVariant::ASYNC_PUSH_DD);
 
     engine.SetOptions(engine_opt);
     engine.InitGraph(source_node);

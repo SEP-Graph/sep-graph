@@ -1,7 +1,9 @@
-//
-// Created by liang on 5/25/18.
-//
-
+// ----------------------------------------------------------------
+// SEP-Graph: Finding Shortest Execution Paths for Graph Processing under a Hybrid Framework on GPU
+// ----------------------------------------------------------------
+// This source code is distributed under the terms of LICENSE
+// in the root directory of this source distribution.
+// ----------------------------------------------------------------
 #ifndef HYBRID_CLION_CUDA_H
 #define HYBRID_CLION_CUDA_H
 #ifdef __JETBRAINS_IDE__

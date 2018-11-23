@@ -1,6 +1,9 @@
-//
-// Created by liang on 7/16/18.
-//
+// ----------------------------------------------------------------
+// SEP-Graph: Finding Shortest Execution Paths for Graph Processing under a Hybrid Framework on GPU
+// ----------------------------------------------------------------
+// This source code is distributed under the terms of LICENSE
+// in the root directory of this source distribution.
+// ----------------------------------------------------------------
 #include <cub/grid/grid_barrier.cuh>
 #include <groute/common.h>
 #include <groute/device/cta_scheduler_hybrid.cuh>

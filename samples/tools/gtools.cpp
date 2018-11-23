@@ -1,6 +1,9 @@
-//
-// Created by liang on 4/19/18.
-//
+// ----------------------------------------------------------------
+// SEP-Graph: Finding Shortest Execution Paths for Graph Processing under a Hybrid Framework on GPU
+// ----------------------------------------------------------------
+// This source code is distributed under the terms of LICENSE
+// in the root directory of this source distribution.
+// ----------------------------------------------------------------
 #include <algorithm>
 #include <vector>
 #include <set>

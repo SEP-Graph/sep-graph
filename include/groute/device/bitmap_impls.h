@@ -1,7 +1,9 @@
-//
-// Created by gengl on 18-11-14.
-//
-
+// ----------------------------------------------------------------
+// SEP-Graph: Finding Shortest Execution Paths for Graph Processing under a Hybrid Framework on GPU
+// ----------------------------------------------------------------
+// This source code is distributed under the terms of LICENSE
+// in the root directory of this source distribution.
+// ----------------------------------------------------------------
 #ifndef SEP_GRAPH_BITMAP_IMPLS_H
 #define SEP_GRAPH_BITMAP_IMPLS_H
 

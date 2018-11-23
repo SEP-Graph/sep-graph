@@ -1,7 +1,9 @@
-//
-// Created by liang on 7/25/18.
-//
-
+// ----------------------------------------------------------------
+// SEP-Graph: Finding Shortest Execution Paths for Graph Processing under a Hybrid Framework on GPU
+// ----------------------------------------------------------------
+// This source code is distributed under the terms of LICENSE
+// in the root directory of this source distribution.
+// ----------------------------------------------------------------
 #ifndef HYBRID_WORKLIST_STACK_H
 #define HYBRID_WORKLIST_STACK_H
 

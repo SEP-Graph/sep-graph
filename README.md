@@ -1,8 +1,7 @@
 # SEG-Graph: Finding Shortest Exection Paths for Graph Processing under a Hybrid Framework on GPU #
 
 ## 1. Introduction ##
-This repo contains all the source code and scripts to compile SEP-Graph and reproduce the experiments in
-PPoPP 2019 paper.
+This repo contains all the source code to build SEP-Graph.
 
 ## 2. Installation ##
 

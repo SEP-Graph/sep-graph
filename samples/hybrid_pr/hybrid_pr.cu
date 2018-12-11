@@ -184,15 +184,17 @@ bool HybridPageRank()
     }
 
     printf("Total rank : %f\n", pr_sum);
-
     printf("max residual: %f\n", max_residual);
 
-    // Check results
+    bool success = true;
     if (FLAGS_check)
     {
         auto regression = PageRankHost(engine.CSRGraph());
         auto gathered_output = engine.GatherValue();
-        PageRankCheckErrors(gathered_output, regression);
+        int errors = PageRankCheckErrors(gathered_output, regression);
+
+        success = errors == 0;
+        printf("total errors: %d\n", errors);
     }
     else
     {
@@ -203,5 +205,6 @@ bool HybridPageRank()
     {
         PageRankOutput(FLAGS_output.data(), ranks);
     }
-    return true;
+
+    return success;
 }

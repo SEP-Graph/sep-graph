@@ -220,11 +220,14 @@ bool HybridBFS()
     writer.write("non_atomic", FLAGS_non_atomic ? "YES" : "NO");
 
     const auto &levels = engine.GatherValue();
+    bool success = true;
 
     if (FLAGS_check)
     {
         auto regression = BFSHost(engine.CSRGraph(), source_node);
         int errors = BFSCheckErrors(levels, regression);
+
+        success = errors == 0;
         printf("total errors: %d\n", errors);
     }
     else
@@ -236,5 +239,5 @@ bool HybridBFS()
     {
         BFSOutput(FLAGS_output.data(), levels);
     }
-    return true;
+    return success;
 }

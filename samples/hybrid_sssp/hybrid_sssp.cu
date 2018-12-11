@@ -221,10 +221,13 @@ bool HybridSSSP()
     const auto *p_weight_datum =
             const_cast<sepgraph::graphs::GraphDatum<distance_t, distance_t, distance_t> &>(engine.GetGraphDatum()).m_csr_edge_weight_datum.GetHostDataPtr();
 
+    bool success = true;
     if (FLAGS_check)
     {
         auto regression = SSSPHostNaive(engine.CSRGraph(), p_weight_datum, source_node);
         int errors = SSSPCheckErrors(distances, regression);
+
+        success = errors == 0;
         printf("total errors: %d\n", errors);
     }
     else
@@ -236,5 +239,5 @@ bool HybridSSSP()
     {
         SSSPOutput(FLAGS_output.data(), distances);
     }
-    return true;
+    return success;
 }

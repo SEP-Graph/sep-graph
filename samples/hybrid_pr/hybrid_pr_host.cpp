@@ -139,77 +139,25 @@ int PageRankCheckErrors(std::vector<rank_t> &ranks, std::vector<rank_t> &regress
         for (auto &val : regression) val /= regression_sum;
     }
 
-    struct pr_pair
-    {
-        index_t node;
-        rank_t rank;
+    int num_diffs = 0;
 
-        pr_pair(index_t node, rank_t rank) : node(node), rank(rank)
-        {}
+    for(int node=0;node<ranks.size();node++) {
 
-        pr_pair() : node(-1), rank(-1)
-        {}
-
-        inline bool operator<(const pr_pair &rhs) const
-        {
-            return rank < rhs.rank;
+        bool is_right = true;
+        if (fabs(ranks[node]) < 0.01f && fabs(regression[node] - 1) < 0.01f) continue;
+        if (fabs(ranks[node] - 0.0) < 0.01f) {
+            if (fabs(ranks[node] - regression[node]) > ERROR_THRESHOLD)
+                is_right = false;
+        } else {
+            if (fabs((ranks[node] - regression[node]) / regression[node]) > ERROR_THRESHOLD)
+                is_right = false;
         }
-    };
 
-    std::vector<pr_pair> ranks_pairs(ranks.size());
-    std::vector<pr_pair> regression_pairs(ranks.size());
-
-    for (size_t i = 0; i < ranks.size(); i++)
-    {
-        ranks_pairs[i] = pr_pair(i, ranks[i]);
-        regression_pairs[i] = pr_pair(i, regression[i]);
+        if(!is_right) num_diffs++;
     }
 
-    std::stable_sort(ranks_pairs.rbegin(), ranks_pairs.rend());
-    std::stable_sort(regression_pairs.rbegin(), regression_pairs.rend()); // reversed sort, we want the top ranks
 
-    int top = std::min((size_t) FLAGS_top_ranks, ranks.size());
-
-    float mean_diff = 0.0f;
-    int num_diffs = 0, missing_nodes = 0;
-
-    std::unordered_set<index_t> top_nodes;
-    for (int i = 0, t = std::min((size_t) (top * 1.01), ranks.size()); i < t; ++i)
-    {
-        top_nodes.insert(regression_pairs[i].node);
-    }
-
-    for (int i = 0; i < top; ++i)
-    {
-        float diff = ranks_pairs[i].rank - regression_pairs[i].rank;
-        if (top_nodes.find(ranks_pairs[i].node) == top_nodes.end())
-        {
-            missing_nodes++; // <-- nodes may switch locations in the rank because of small diffs as well
-        }
-        else if (fabs(1.0f - (ranks_pairs[i].rank / regression_pairs[i].rank)) > 1e-2)
-        {
-            if (FLAGS_verbose)
-                printf("Difference in index %d: %f != %f\n", i, ranks_pairs[i].rank, regression_pairs[i].rank);
-            num_diffs++;
-        }
-        mean_diff += fabs(diff);
-    }
-    mean_diff /= top;
-
-    bool res = num_diffs + missing_nodes == 0 && mean_diff <= 1e-2;
-    if (!res || FLAGS_verbose)
-    {
-        printf("[regression]\t\t\t[result]\n");
-        for (int i = 0; i < 10; ++i)
-        {
-            printf("(%d, %f)\t\t(%d, %f)\n",
-                   regression_pairs[i].node, regression_pairs[i].rank, ranks_pairs[i].node, ranks_pairs[i].rank);
-        }
-        printf("\nSummary: %d/%d large differences, %d/%d missing nodes, total mean diff: %f\n\n", num_diffs, (int) top, missing_nodes, (int) top,
-               mean_diff);
-    }
-
-    return res ? 0 : num_diffs + missing_nodes;
+    return num_diffs;
 }
 
 int PageRankOutput(const char *file, const std::vector<rank_t> &ranks)

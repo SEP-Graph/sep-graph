@@ -37,6 +37,7 @@ typedef float rank_t;
 
 #define IDENTITY_ELEMENT 0.0
 #define ALPHA 0.85
+#define ERROR_THRESHOLD 0.05
 
 std::vector<rank_t> PageRankHost(const groute::graphs::host::CSRGraph& graph);
 int PageRankCheckErrors(std::vector<rank_t>& ranks, std::vector<rank_t>& regression);

@@ -388,11 +388,13 @@ bool HybridBC() {
             printf("%u %f %f\n", node, regression_bc_values[node], node_bc_values[node]);
         }
 
+        printf("Checking sigmas...\n");
         success = BCCheckErrors(regression_sigma_values, node_sigmas) == 0;
         if (!success) {
             fprintf(stderr, "Error sigmas");
         }
 
+        printf("Checking BC values...\n");
         success = success && BCCheckErrors(regression_bc_values, node_bc_values) == 0;
         if (!success) {
             fprintf(stderr, "Error BC  values");

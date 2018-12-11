@@ -16,6 +16,7 @@ typedef float centrality_t;
 typedef float sigma_t;
 
 #define IDENTITY_ELEMENT UINT32_MAX
+#define ERROR_THRESHOLD 0.05
 
 std::pair<std::vector<centrality_t>, std::vector<sigma_t >>
 BetweennessCentralityHost(const groute::graphs::host::CSRGraph &graph, index_t src);
